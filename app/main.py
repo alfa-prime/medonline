@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from app.core.httpx_client import HTTPXClient
 from app.route import router as api_router
 from app.core.logger import logger
+from fastapi.middleware.cors import CORSMiddleware
 
 
 @asynccontextmanager
@@ -34,3 +35,11 @@ app = FastAPI(
 
 # Подключаем маршруты API
 app.include_router(api_router)
+
+app.add_middleware(
+    CORSMiddleware, # noqa
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
