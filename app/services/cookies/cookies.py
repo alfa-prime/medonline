@@ -21,9 +21,33 @@ async def get_new():
 
         # authorize
         url = BASE_URL
-        params = {"c": "main", "m": "index", "method": "Logon"}
-        data = {"login": settings.EVMIAS_LOGIN, "psw": settings.EVMIAS_PASSWORD}
-        response = await HTTPXClient.fetch(url=url, method="POST", cookies=cookies, params=params, data=data)
+        headers = {
+            "Origin": "https://evmias.fmba.gov.ru",
+            "Referer": "https://evmias.fmba.gov.ru/?c=promed",
+            "X-Requested-With": "XMLHttpRequest",  # Тоже важный заголовок из реального запроса
+        }
+        params = {
+            "c": "main",
+            "m": "index",
+            "method": "Logon",
+            "login": settings.EVMIAS_LOGIN
+        }
+
+        data = {
+            "login": settings.EVMIAS_LOGIN,
+            "psw": settings.EVMIAS_PASSWORD,
+            "swUserRegion": "",
+            "swUserDBType": "",
+        }
+
+        response = await HTTPXClient.fetch(
+            url=url,
+            method="POST",
+            headers=headers,
+            cookies=cookies,
+            params=params,
+            data=data
+        )
         if response['status_code'] == 200 and "true" in response['text']:
             logger.info("Authorization success")
         else:
