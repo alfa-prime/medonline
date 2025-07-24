@@ -23,7 +23,7 @@ RUN pip install --no-cache-dir --upgrade pip \
 FROM python:3.10-slim
 
 # Install micro text editor and clean up cache to reduce image size
-RUN apt-get update && apt-get install -y micro postgresql-client\
+RUN apt-get update && apt-get install -y\
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -40,3 +40,7 @@ COPY --from=builder /install /usr/local
 
 # Копируем код приложения в контейнер
 COPY ./app /code/app
+# COPY ./dashboard /code/dashboard
+
+# Команда для разработки с hot-reload
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

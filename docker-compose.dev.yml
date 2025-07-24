@@ -2,9 +2,8 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile.app
-    container_name: web
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+      dockerfile: Dockerfile.dev
+    container_name: web-dev
     restart: always
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health/ping"]
@@ -16,5 +15,6 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./app:/code/app:ro
+      - ./app:/code/app
       - ./logs:/code/logs
+#      - ./dashboard:/code/dashboard
