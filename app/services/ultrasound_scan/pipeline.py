@@ -6,6 +6,7 @@ import htmlmin
 from app.core.config import get_settings
 from app.core.httpx_client import HTTPXClient
 from app.core.logger import logger
+from app.services.cookies.manager import cookie_manager
 
 settings = get_settings()
 LOG_TEST_NAME = "ULTRASOUND_SCAN"

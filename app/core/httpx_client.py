@@ -13,7 +13,11 @@ class HTTPXClient:
     @classmethod
     async def initialize(cls):
         if cls._instance is None:
-            cls._instance = httpx.AsyncClient(timeout=30.0, verify=False)
+            cls._instance = httpx.AsyncClient(
+                timeout=30.0,
+                follow_redirects=True,
+                verify=False,
+            )
 
     @classmethod
     async def shutdown(cls):
@@ -50,6 +54,7 @@ class HTTPXClient:
             response = await client.request(
                 method=method, url=url, params=params, data=data, headers=headers, cookies=cookies
             )
+
             response.raise_for_status()
 
             json_data = None
@@ -68,14 +73,7 @@ class HTTPXClient:
                 status_code=response.status_code, headers=dict(response.headers),
                 cookies=dict(response.cookies), text=response.text, json=json_data
             )
-        except httpx.HTTPStatusError as e:
-            # Локальный импорт для разрыва циклической зависимости
-            from app.services.cookies.manager import cookie_manager
 
-            if e.response.status_code in [401, 403]:
-                await cookie_manager.invalidate_cache()
-
-            raise e
         except Exception as e:
             logger.error(f"Unhandled exception in HTTPXClient.fetch: {e}", exc_info=True)
             raise e
