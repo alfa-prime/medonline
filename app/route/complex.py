@@ -29,7 +29,7 @@ async def get_tests(request: PatientSearchRequest = Body(
 ) -> Dict[str, Any]:
 
     try:
-        logger.info(f"Fetching all tests for patient {request.last_name}...")
+        logger.info(f"Fetching all tests for patient ...")
         results = await asyncio.gather(
             functional_tests_pipeline.get_patient_tests(
                 cookies, request.last_name, request.first_name, request.middle_name, request.birthday
@@ -45,7 +45,7 @@ async def get_tests(request: PatientSearchRequest = Body(
             ),
             return_exceptions=True
         )
-        logger.info(f"All tests for patient {request.last_name} fetched.")
+        logger.info(f"All tests for patient fetched.")
 
         (functional_tests_result, ultrasound_scan_result, medtest_result, x_ray_result) = results
 

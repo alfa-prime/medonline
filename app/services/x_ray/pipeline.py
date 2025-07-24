@@ -1,4 +1,3 @@
-import json
 import re
 import asyncio
 from bs4 import BeautifulSoup
@@ -7,7 +6,6 @@ import htmlmin
 from app.core.config import get_settings
 from app.core.httpx_client import HTTPXClient
 from app.core.logger import logger
-from app.services.cookies.manager import cookie_manager
 
 settings = get_settings()
 LOG_TEST_NAME = "X-RAY_SCAN"
@@ -101,9 +99,8 @@ async def sanitize_data(data: dict, cookies: dict) -> dict | None:
     age = person_data.get("Person_Age", "")
 
     tasks = [get_tests_result(test.get("EvnXml_id"), cookies) for test in tests]
-    logger.info(f"{LOG_TEST_NAME} : Fetching {len(tasks)} test results for {last_name} in parallel...")
     results = await asyncio.gather(*tasks)
-    logger.info(f"{LOG_TEST_NAME} : All {len(tasks)} results received.")
+    logger.info(f"{LOG_TEST_NAME} : {len(tasks)} results received.")
 
     sanitized_tests = {}
     tests_dates = []
@@ -136,7 +133,7 @@ async def sanitize_data(data: dict, cookies: dict) -> dict | None:
         return None
 
     tests_dates.sort(reverse=True)
-    logger.info(f"{LOG_TEST_NAME} : Results for patient {last_name} {first_name} {middle_name} got successfully")
+    # logger.info(f"{LOG_TEST_NAME} : Results got successfully")
 
     return {
         "person": {
