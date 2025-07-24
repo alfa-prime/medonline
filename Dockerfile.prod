@@ -23,7 +23,7 @@ RUN pip install --no-cache-dir --upgrade pip \
 FROM python:3.10-slim
 
 # Install micro text editor and clean up cache to reduce image size
-RUN apt-get update && apt-get install -y\
+RUN apt-get update && apt-get install micro -y\
     && rm -rf /var/lib/apt/lists/*
 
 
