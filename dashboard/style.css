@@ -1,0 +1,18 @@
+/* dashboard/style.css */
+/* Делаем боковое меню "липким" и на всю высоту */
+.menu {
+    position: sticky;
+    top: 20px;
+}
+
+/* Минимальная высота для колонок, чтобы фон был на весь экран */
+.columns {
+    min-height: 90vh;
+}
+
+/* Небольшой стиль для контентной части */
+.column.is-one-quarter {
+    background-color: #f5f5f5;
+    border-radius: 6px;
+    padding: 20px;
+}

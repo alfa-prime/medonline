@@ -17,4 +17,4 @@ services:
     volumes:
       - ./app:/code/app
       - ./logs:/code/logs
-#      - ./dashboard:/code/dashboard
+      - ./dashboard:/code/dashboard
