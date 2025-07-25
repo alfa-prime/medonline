@@ -16,3 +16,74 @@
     border-radius: 6px;
     padding: 20px;
 }
+
+/* Стили для таблицы логов */
+.log-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Для лучшего контроля над шириной колонок */
+}
+.log-table td {
+    padding: 4px 8px;
+    vertical-align: top;
+    border-bottom: 1px solid #3a3a3a; /* Темная граница для темной темы */
+}
+
+/* Колонка с временной меткой */
+.log-ts {
+    width: 170px; /* Немного шире для полной даты */
+    color: #888;
+    white-space: nowrap; /* Запрещаем перенос */
+}
+
+/* Колонка с уровнем лога */
+.log-level {
+    width: 80px; /* Немного шире */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Колонка с сообщением */
+.log-msg {
+    width: auto;
+    word-break: break-all;
+}
+
+/* --- ЦВЕТА ДЛЯ УРОВНЕЙ ЛОГОВ --- */
+.log-level-info {
+    color: #6caddf; /* Светло-синий */
+}
+.log-level-warning {
+    color: #ffc107; /* Янтарный/желтый */
+}
+.log-level-error {
+    color: #dc3545; /* Красный */
+}
+.log-level-critical {
+    color: #dc3545;
+    background-color: #4d1c20; /* Темно-красный фон для крит. ошибок */
+}
+.log-level-debug {
+    color: #909090; /* Серый для отладки */
+}
+
+.status-grid {
+    display: grid;
+    /* Убираем repeat(auto-fit, ...), который создает колонки */
+    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+
+    /* Новые правила для центрирования одного элемента */
+    justify-content: center; /* Центрируем по горизонтали */
+    gap: 20px;
+}
+
+.status-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    text-align: center;
+    /* Задаем фиксированную или минимальную ширину, чтобы она не сжималась */
+    min-width: 300px;
+    max-width: 500px; /* Опционально, чтобы не была слишком широкой на больших экранах */
+}

@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VitalSigns Dashboard</title>
-    <!-- ПОДКЛЮЧАЕМ BULMA CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
-    <!-- ПОДКЛЮЧАЕМ FONT AWESOME ДЛЯ ИКОНОК -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <!-- ПОДКЛЮЧАЕМ НАШИ СТИЛИ (ОНИ БУДУТ ПЕРЕОПРЕДЕЛЯТЬ BULMA, ЕСЛИ НУЖНО) -->
     <link rel="stylesheet" href="/dashboard-static/style.css">
 </head>
 <body>
@@ -18,22 +15,15 @@
                 <!-- КОЛОНКА С МЕНЮ (слева) -->
                 <div class="column is-one-quarter">
                     <aside class="menu">
-                        <p class="menu-label">
-                            General
-                        </p>
+                        <p class="menu-label">General</p>
                         <ul class="menu-list">
                             <li><a class="is-active" data-target="overview"><span class="icon"><i class="fas fa-tachometer-alt"></i></span> Overview</a></li>
                         </ul>
-                        <p class="menu-label">
-                            Analytics
-                        </p>
+                        <p class="menu-label">Analytics</p>
                         <ul class="menu-list">
                             <li><a data-target="history"><span class="icon"><i class="fas fa-history"></i></span> Daily History</a></li>
-                            <li><a data-target="charts"><span class="icon"><i class="fas fa-chart-line"></i></span> Charts</a></li>
                         </ul>
-                        <p class="menu-label">
-                            Debugging
-                        </p>
+                        <p class="menu-label">Debugging</p>
                         <ul class="menu-list">
                             <li><a data-target="logs"><span class="icon"><i class="fas fa-bug"></i></span> Logs</a></li>
                         </ul>
@@ -42,28 +32,55 @@
 
                 <!-- КОЛОНКА С КОНТЕНТОМ (справа) -->
                 <div class="column">
+                    <!-- ======================================================= -->
                     <!-- Панель "Overview" (видна по умолчанию) -->
+                    <!-- ======================================================= -->
                     <div id="content-overview" class="content-panel">
                         <h1 class="title">Overview</h1>
-                        <p>Здесь будут главные индикаторы и статистика за сегодня...</p>
+
+                        <!-- Статусы -->
+                        <div class="columns is-multiline">
+                            <div class="column is-half">
+                                <div class="box has-text-centered">
+                                    <p class="heading">Service Status</p>
+                                    <div id="service-status" class="status-indicator pending">PENDING</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Сюда в будущем добавим карточки со статистикой -->
+
                     </div>
 
+                    <!-- ======================================================= -->
                     <!-- Панель "History" (скрыта) -->
+                    <!-- ======================================================= -->
                     <div id="content-history" class="content-panel" style="display: none;">
                         <h1 class="title">Daily History & Analytics</h1>
-                        <p>Здесь будет таблица с историей и графики...</p>
+                        <p class="subtitle">Здесь будет таблица с историей за 30 дней.</p>
+                        <!-- Место для таблицы истории -->
                     </div>
 
-                    <!-- Панель "Charts" (скрыта) -->
-                    <div id="content-charts" class="content-panel" style="display: none;">
-                        <h1 class="title">Charts</h1>
-                        <p>Здесь будут только графики...</p>
-                    </div>
-
+                    <!-- ======================================================= -->
                     <!-- Панель "Logs" (скрыта) -->
+                    <!-- ======================================================= -->
                     <div id="content-logs" class="content-panel" style="display: none;">
                         <h1 class="title">Logs Explorer</h1>
-                        <p>Здесь будут наши логи...</p>
+
+                        <div class="columns is-multiline">
+                            <div class="column is-full">
+                                <div class="box">
+                                    <h2 class="subtitle">Application Logs</h2>
+                                    <pre id="app-logs" class="log-box">Loading...</pre>
+                                </div>
+                            </div>
+                            <div class="column is-full">
+                                <div class="box">
+                                    <h2 class="subtitle">Error Logs</h2>
+                                    <pre id="error-logs" class="log-box">Loading...</pre>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

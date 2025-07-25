@@ -8,6 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from app.core.httpx_client import HTTPXClient
 from app.core.logger import logger
 from app.route import router as api_router
+from app.route.dashboard import router as dashboard_router
 
 
 @asynccontextmanager
@@ -47,6 +48,7 @@ async def get_dashboard_page():
 
 # Подключаем маршруты API
 app.include_router(api_router)
+app.include_router(dashboard_router)
 
 app.add_middleware(
     CORSMiddleware,  # noqa
