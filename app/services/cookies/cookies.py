@@ -28,13 +28,6 @@ async def get_new():
             "Origin": "https://evmias.fmba.gov.ru",
             "Referer": "https://evmias.fmba.gov.ru/?c=promed",
             "X-Requested-With": "XMLHttpRequest",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0",
-            "Accept": "*/*",
-            "Sec-Fetch-Dest": "empty",
-            "Sec-Fetch-Mode": "cors",
-            "Sec-Fetch-Site": "same-origin",
-            "Priority": "u=0",
-            "Content-Type": "text/x-gwt-rpc; charset=utf-8",
         }
         params = {
             "c": "main", "m": "index", "method": "Logon", "login": settings.EVMIAS_LOGIN
@@ -57,13 +50,6 @@ async def get_new():
             "Origin": "https://evmias.fmba.gov.ru",
             "Referer": "https://evmias.fmba.gov.ru/?c=promed",
             "X-Requested-With": "XMLHttpRequest",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0",
-            "Accept": "*/*",
-            "Sec-Fetch-Dest": "empty",
-            "Sec-Fetch-Mode": "cors",
-            "Sec-Fetch-Site": "same-origin",
-            "Priority": "u=0",
-            "Content-Type": "text/x-gwt-rpc; charset=utf-8",
             "X-Gwt-Permutation": settings.EVMIAS_PERMUTATION,
             "X-Gwt-Module-Base": "https://evmias.fmba.gov.ru/ermp/",
         }
@@ -114,12 +100,6 @@ async def check_existing() -> bool:
         "Origin": "https://evmias.fmba.gov.ru",
         "Referer": "https://evmias.fmba.gov.ru/?c=promed",
         "X-Requested-With": "XMLHttpRequest",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0",
-        "Accept": "*/*",
-        "Sec-Fetch-Dest": "empty",
-        "Sec-Fetch-Mode": "cors",
-        "Sec-Fetch-Site": "same-origin",
-        "Priority": "u=0",
     }
     params = {"c": "Common", "m": "getCurrentDateTime"}
     data = {"is_activerules": "true"}
