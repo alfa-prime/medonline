@@ -47,9 +47,7 @@ async def get_new():
         # get second part of cookies
         url = f"{BASE_URL}ermp/servlets/dispatch.servlet"
         headers = {
-            "Origin": "https://evmias.fmba.gov.ru",
-            "Referer": "https://evmias.fmba.gov.ru/?c=promed",
-            "X-Requested-With": "XMLHttpRequest",
+            "Content-Type": "text/x-gwt-rpc; charset=utf-8",
             "X-Gwt-Permutation": settings.EVMIAS_PERMUTATION,
             "X-Gwt-Module-Base": "https://evmias.fmba.gov.ru/ermp/",
         }
@@ -96,16 +94,11 @@ async def check_existing() -> bool:
 
     logger.info("Performing proactive cookie check...")
     url = settings.BASE_URL
-    headers = {
-        "Origin": "https://evmias.fmba.gov.ru",
-        "Referer": "https://evmias.fmba.gov.ru/?c=promed",
-        "X-Requested-With": "XMLHttpRequest",
-    }
     params = {"c": "Common", "m": "getCurrentDateTime"}
     data = {"is_activerules": "true"}
 
     try:
-        response = await HTTPXClient.fetch(url=url, method="POST", params=params, cookies=cookies, data=data, headers=headers)
+        response = await HTTPXClient.fetch(url=url, method="POST", params=params, cookies=cookies, data=data)
         if response["status_code"] == 200 and response.get("json") is not None:
             logger.info("Proactive check successful: cookies are valid.")
             return True
