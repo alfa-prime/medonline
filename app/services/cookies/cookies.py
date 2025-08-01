@@ -28,6 +28,13 @@ async def get_new():
             "Origin": "https://evmias.fmba.gov.ru",
             "Referer": "https://evmias.fmba.gov.ru/?c=promed",
             "X-Requested-With": "XMLHttpRequest",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0",
+            "Accept": "*/*",
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-origin",
+            "Priority": "u=0",
+            "Content-Type": "text/x-gwt-rpc; charset=utf-8",
         }
         params = {
             "c": "main", "m": "index", "method": "Logon", "login": settings.EVMIAS_LOGIN
@@ -47,6 +54,15 @@ async def get_new():
         # get second part of cookies
         url = f"{BASE_URL}ermp/servlets/dispatch.servlet"
         headers = {
+            "Origin": "https://evmias.fmba.gov.ru",
+            "Referer": "https://evmias.fmba.gov.ru/?c=promed",
+            "X-Requested-With": "XMLHttpRequest",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0",
+            "Accept": "*/*",
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-origin",
+            "Priority": "u=0",
             "Content-Type": "text/x-gwt-rpc; charset=utf-8",
             "X-Gwt-Permutation": settings.EVMIAS_PERMUTATION,
             "X-Gwt-Module-Base": "https://evmias.fmba.gov.ru/ermp/",
@@ -94,11 +110,23 @@ async def check_existing() -> bool:
 
     logger.info("Performing proactive cookie check...")
     url = settings.BASE_URL
+    headers = {
+        "Origin": "https://evmias.fmba.gov.ru",
+        "Referer": "https://evmias.fmba.gov.ru/?c=promed",
+        "X-Requested-With": "XMLHttpRequest",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0",
+        "Accept": "*/*",
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "same-origin",
+        "Priority": "u=0",
+        "Content-Type": "text/x-gwt-rpc; charset=utf-8",
+    }
     params = {"c": "Common", "m": "getCurrentDateTime"}
     data = {"is_activerules": "true"}
 
     try:
-        response = await HTTPXClient.fetch(url=url, method="POST", params=params, cookies=cookies, data=data)
+        response = await HTTPXClient.fetch(url=url, method="POST", params=params, cookies=cookies, data=data, headers=headers)
         if response["status_code"] == 200 and response.get("json") is not None:
             logger.info("Proactive check successful: cookies are valid.")
             return True
