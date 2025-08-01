@@ -120,7 +120,6 @@ async def check_existing() -> bool:
         "Sec-Fetch-Mode": "cors",
         "Sec-Fetch-Site": "same-origin",
         "Priority": "u=0",
-        "Content-Type": "text/x-gwt-rpc; charset=utf-8",
     }
     params = {"c": "Common", "m": "getCurrentDateTime"}
     data = {"is_activerules": "true"}
